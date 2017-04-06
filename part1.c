@@ -33,13 +33,12 @@ int main() {
 		while ( i <= current_int) {
 			if (i == current_int) {
 				printf("The number %d is a power of 2: %d = 2^%d\n", i, i, j);
-			} else {
-				//printf("this is not\n");
+				sum += j;
 			}
 			i *= 2;
 			j++;
 		}
-		sum += current_int;
+
 	}
 	printf("Total exponent sum is %d", sum);
 	return 0;
@@ -59,7 +58,10 @@ inline int till_first_enter(){
 	while (c != 10 && c != 32){
 		//printf("this is number: %d", result);
 		c = getchar();
-		if ( c >= 48 && c <= 57) {
+		if ( c == 45 && i == 0) {
+			negative = true;
+			//printf("negative");
+		} else if ( c >= 48 && c <= 57) {
 			//printf("this is number:");
 			result += (c - 48);
 			result *= 10;
@@ -70,9 +72,6 @@ inline int till_first_enter(){
 			//printf("int: %d\n", c);
 			printf("Invalid number\n");
 			return 0;
-		} else if ( c == 45 && i == 0) {
-			negative = true;
-			//printf("negative");
 		}
 		i++;
 	}
