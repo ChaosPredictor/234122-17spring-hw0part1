@@ -23,8 +23,62 @@ int main() {
 		printf("Invalid size");
 		return 0;
 	}
-	//printf("number: %d", number);
+
+	char *ptr = malloc(sizeof(char) * number * 10);
+	if (ptr == NULL) {
+		printf(" Out of memory!\n");
+		exit(1);
+	}
+
+	int c=0, length = 0;
+	char ch;
+	printf("Enter numbers:\n");
+	while (c != 10){
+		c = getchar();
+		ch = (char)c;
+		if ( (c >= 48 && c <= 57) || ((c == 45) || (c == 32))) {
+			ptr[length] = ch;
+		} else if ( c != 10) {
+			//printf("char: %c, int: %d", ch, c);
+			printf("Invalid number\n");
+			return 0;
+		}
+		length++;
+	}
+	//printf("STRING1: %s\n" , ptr);
+	int i, j = 1;
+	for (i = 1; i < length; ++i) {
+		if((int)ptr[j] == 32 && (int)ptr[j-1] == 32) {
+			ptr[i] = ptr[j+1];
+			i--;
+		} else {
+			ptr[i] = ptr[j];
+		}
+		j++;
+	}
+	//printf("STRING2: %s\n" , ptr);
+
+	char* pch = strtok (ptr," ");
 	int current_int, sum = 0;
+	while (pch != NULL)	{
+		//printf ("%s\n",pch);
+		current_int = array_to_int(pch);
+		//printf("int: %d\n", current_int);
+		int i = 1, j = 0;
+		while ( i <= current_int) {
+			if (i == current_int) {
+				printf("The number %d is a power of 2: %d = 2^%d\n", i, i, j);
+				sum += j;
+			}
+			i *= 2;
+			j++;
+		}
+		pch = strtok (NULL, " ");
+	}
+
+
+	//printf("number: %d", number);
+	/*int current_int, sum = 0;
 	printf("Enter numbers:\n");
 	for (int i = 0; i < number; ++i) {
 		current_int = till_first_enter();
@@ -39,7 +93,7 @@ int main() {
 			j++;
 		}
 
-	}
+	}*/
 	printf("Total exponent sum is %d", sum);
 	return 0;
 }
@@ -55,7 +109,7 @@ int char_to_int(char c) {
 inline int till_first_enter(){
 	int c=0, result = 0, i = 0;
 	bool negative = false;
-	while (c != 10 && c != 32){
+	while (c != 10){
 		//printf("this is number: %d", result);
 		c = getchar();
 		if ( c == 45 && i == 0) {
@@ -68,9 +122,10 @@ inline int till_first_enter(){
 			//printf("this is number: %d", result);
 			//putchar( c );
 			//printf("\n");
-		} else if ( c != 10 && c != 32 && c != 45) {
+		} else if ( c != 10) {
 			//printf("int: %d\n", c);
 			printf("Invalid number\n");
+			break;
 			return 0;
 		}
 		i++;
@@ -82,15 +137,23 @@ inline int till_first_enter(){
 }
 
 int array_to_int(char *c){
-	int i,j = 0;
+	int i = 0,j = 0;
 	int sum = 0;
+	bool negative = false;
+	if (c[0] == 45) {
+		negative = true;
+		i++;
+	}
 	while (c[i] != 0) {
 		sum *= 10;
 		j = char_to_int(c[i]);
 		if (j != -1) sum += j;
-		else return -1;
+		else return 0;
 		//printf("%i\n", sum);
 		i++;
+	}
+	if (negative) {
+		return -sum;
 	}
 	return sum;
 	//printf("second: %c\n",c[1]);
