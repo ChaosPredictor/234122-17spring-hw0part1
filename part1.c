@@ -11,40 +11,17 @@
 
 int char_to_int(char c);
 int array_to_int(char *c);
+int till_first_enter();
 
 int main() {
-	char str1[10];
+	int number;
 	printf("Enter size of input:");
-	scanf("%s", str1);
-	//printf("was entered: %s\n", str1);
-	//int i = char_to_int(str1[0]);
-	int size = array_to_int(str1);
-	if (size < 1) {
+	number = till_first_enter();
+	if ( number == -1) {
 		printf("Invalid size");
 		return 0;
 	}
-	int *array_ptr;
-	array_ptr = (int*) malloc(size * sizeof(int));
-    if(array_ptr == NULL)
-	{
-        printf("Error! memory not allocated.");
-        exit(0);
-    }
-	int temp_int = 0, sum = 0;
-	for (int i = 0; i < size; ++i) {
-		printf("Enter numbers:\n");
-		scanf("%s",str1);
-		temp_int = array_to_int(	str1);
-		if (temp_int<0) {
-			printf("Invalid number");
-			free(array_ptr);
-			return 0;
-		}
-		array_ptr[i] = temp_int;
-		sum += temp_int;
-	}
-	printf("sum:%i ", sum);
-	free(array_ptr);
+	printf("number: %d", number);
 	return 0;
 }
 
@@ -54,6 +31,26 @@ int char_to_int(char c) {
 		return i;
 	}
 	return -1;
+}
+
+int till_first_enter(){
+	int c=0, result = 0;
+	while (c != 10){
+		//printf("this is number: %d", result);
+		c = getchar();
+		if ( c >= 48 && c <= 57) {
+			//printf("this is number:");
+			result += (c - 48);
+			result *= 10;
+			//printf("this is number: %d", result);
+			//putchar( c );
+			//printf("\n");
+		} else if ( c != 10) {
+			//printf("this is not a number\n %d", c);
+			return -1;
+		}
+	}
+	return result/10;
 }
 
 int array_to_int(char *c){
