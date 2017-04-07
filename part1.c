@@ -42,8 +42,9 @@ int main() {
 
 	//printf("You entered: %s\n", ptr);
 	//printf("sting len: %d\n", strlen(ptr));
+	int len = strlen(ptr);
 
-	if (checkStringValidity(ptr, strlen(ptr)) == -1) {
+	if (checkStringValidity(ptr, len) == -1) {
 		printf("Invalid number\n");
 		free(ptr);
 		return 0;
@@ -66,13 +67,17 @@ int main() {
 		}
 		j++;
 	}*/
-
-	if (removeDoubleSpaces(ptr,strlen(ptr)) != -1){
+	printf("old length: %d\n", len);
+	printf("STRING1: %s\n" , ptr);
+	int new_len = removeDoubleSpaces(ptr, len);
+	printf("STRING2: %s\n" , ptr);
+	if ( new_len == -1){
 		//printf("STRING2: %s\n" , ptr);
 		free(ptr);
 		return 0;
 	}
 
+	printf("new length: %d\n", new_len);
 
 	char* pch = strtok (ptr," ");
 	int current_int, sum = 0, k;
@@ -104,17 +109,22 @@ int charToInt(char c) {
 	return -1;
 }
 
+int printMainPart(char *string, int len) {
+
+	return 0;
+}
+
 int removeDoubleSpaces(char *string, int len) {
-	int i, j = 1;
-	for (i = 1; i < len; ++i) {
+	int i = 1, j;
+	for (j = 1; j < len; ++j) {
 		if((int)string[j] == 32 && (int)string[j-1] == 32) {
-			string[i] = string[j+1];
-			i--;
+			//string[i] = string[j+1];
 		} else {
 			string[i] = string[j];
+			i++;
 		}
-		j++;
 	}
+	string[i] = '\0';
 	return i;
 }
 
