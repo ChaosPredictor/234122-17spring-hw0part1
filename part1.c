@@ -59,8 +59,9 @@ int main() {
 	//printf("STRING2: %s\n" , ptr);
 
 	char* pch = strtok (ptr," ");
-	int current_int, sum = 0;
-	while (pch != NULL)	{
+	int current_int, sum = 0, k;
+	while (pch != NULL && k < number)	{
+		k++;
 		//printf ("%s\n",pch);
 		current_int = array_to_int(pch);
 		//printf("int: %d\n", current_int);
