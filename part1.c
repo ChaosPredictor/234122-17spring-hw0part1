@@ -11,14 +11,14 @@
 
 typedef enum { false, true } bool;
 
-int char_to_int(char c);
-int array_to_int(char *c);
-int till_first_enter();
+int charToInt(char c);
+int arrayToInt(char *c);
+int tillFirstEnter();
 
 int main() {
 	int number;
 	printf("Enter size of input:\n");
-	number = till_first_enter();
+	number = tillFirstEnter();
 	if ( number == -1) {
 		printf("Invalid size");
 		return 0;
@@ -63,7 +63,7 @@ int main() {
 	while (pch != NULL && k < number)	{
 		k++;
 		//printf ("%s\n",pch);
-		current_int = array_to_int(pch);
+		current_int = arrayToInt(pch);
 		//printf("int: %d\n", current_int);
 		int i = 1, j = 0;
 		while ( i <= current_int) {
@@ -82,7 +82,7 @@ int main() {
 	/*int current_int, sum = 0;
 	printf("Enter numbers:\n");
 	for (int i = 0; i < number; ++i) {
-		current_int = till_first_enter();
+		current_int = tillFirstEnter();
 		//printf("number: %d\n", current_int);
 		int i = 2, j = 1;
 		while ( i <= current_int) {
@@ -99,7 +99,7 @@ int main() {
 	return 0;
 }
 
-int char_to_int(char c) {
+int charToInt(char c) {
 	int i = c - '0';
 	if (i>=0 && i<=9) {
 		return i;
@@ -107,7 +107,7 @@ int char_to_int(char c) {
 	return -1;
 }
 
-inline int till_first_enter(){
+inline int tillFirstEnter(){
 	int c=0, result = 0, i = 0;
 	bool negative = false;
 	while (c != 10){
@@ -137,7 +137,7 @@ inline int till_first_enter(){
 	return result/10;
 }
 
-int array_to_int(char *c){
+int arrayToInt(char *c){
 	int i = 0,j = 0;
 	int sum = 0;
 	bool negative = false;
@@ -147,7 +147,7 @@ int array_to_int(char *c){
 	}
 	while (c[i] != 0) {
 		sum *= 10;
-		j = char_to_int(c[i]);
+		j = charToInt(c[i]);
 		if (j != -1) sum += j;
 		else return 0;
 		//printf("%i\n", sum);
